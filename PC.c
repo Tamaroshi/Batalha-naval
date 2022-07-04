@@ -1,106 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "PC.h"
 
 
 char** Criar_Tab();
-void Posicionar_navio(char**);
 void Free_Tab(char**);
 void Print_Tab(char**);
-int Escolhe_Coluna(int);
-int Escolhe_Linha(int);
-//int Escolhe_TipoNav();
-int Escolhe_Orient();
-int Preencher_Tab(int, int, int, int, char**);
+int Escolhe_Coluna_PC(int);
+int Escolhe_Linha_PC(int);
+int Escolhe_Orient_PC();
+int Preencher_Tab_PC(int, int, int, int, char**);
 int Verificar_escolha(int, int, int, int, char**);
-void PreencherHorizontal(int, int, int, char**);
-void PreencherVertical(int, int, int, char**);
+void PreencherHorizontal_PC(int, int, int, char**);
+void PreencherVertical_PC(int, int, int, char**);
 
-
-
-int main()
-{
-    char** PC = Criar_Tab();
-    Posicionar_navio(PC);
-    Free_Tab(PC);
-    return 0;
-}
-
-//Aloca memória dinamicamente ao tabuleiro
-char** Criar_Tab()
-{
-    char** novo = (char**)malloc(10*sizeof(char*));
-    for (int i = 0; i < 10; i++)
-        novo[i] = (char*)malloc(10*sizeof(char));
-
-    if(novo!=NULL)
-    {
-        for (int x = 0; x < 10; x++)
-        {
-            for (int z = 0; z < 10; z++)
-                novo[x][z] = '-';
-        }
-    }
-    return novo;
-}
-
-//Libera a memória alocada dinamicamente
-void Free_Tab(char** novo)
-{
-    for (int i = 0; i < 10; i++)
-    {
-        free(novo[i]);
-    }
-    free(novo);
-}
-
-//Printa o tabuleiro
-void Print_Tab(char** novo)
-{
-    printf("   A B C D E F G H I J\n");
-    for(int i = 0; i < 10; i++)
-    {
-        printf("%d  ", i);
-        for (int j = 0; j < 10; j++)
-        {
-            printf("%c ", novo[i][j]);
-            if(j == 9)
-                printf("\n");
-        }
-    }
-}
-
-void Posicionar_navio(char** tab)
+void Posicionar_navio_PC(char** tab)
 {
     int i = 0, x, y, tiponav, d, verificar;
-    printf("Computador\n");
-    Print_Tab(tab);
     srand(time(NULL));
     while(i<5)
     {
         tiponav = i+1;
         //printf("tiponav = %d\n", tiponav);
-        d = Escolhe_Orient();
+        d = Escolhe_Orient_PC();
         //printf("d = %d\n", d);
         switch(tiponav)
         {
             case 5:
                 if(d == 0)
                 {
-                    x = Escolhe_Linha(10);
+                    x = Escolhe_Linha_PC(10);
                     //printf("x = %d\n", x);
-                    y = Escolhe_Coluna(6);
+                    y = Escolhe_Coluna_PC(6);
                     //printf("y = %d\n", y);
-                    i += Preencher_Tab(x, y, tiponav, d, tab);
+                    i += Preencher_Tab_PC(x, y, tiponav, d, tab);
                 }
 
                 else
                 {
-                    x = Escolhe_Linha(6);
+                    x = Escolhe_Linha_PC(6);
                     //printf("x = %d\n", x);
-                    y = Escolhe_Coluna(10);
+                    y = Escolhe_Coluna_PC(10);
                     //printf("y = %d\n", y);
-                    i += Preencher_Tab(x, y, tiponav, d, tab);
+                    i += Preencher_Tab_PC(x, y, tiponav, d, tab);
                 }
 
                 break;
@@ -108,80 +51,80 @@ void Posicionar_navio(char** tab)
             case 4:
                 if(d == 0)
                 {
-                    x = Escolhe_Linha(10);
+                    x = Escolhe_Linha_PC(10);
                     //printf("x = %d\n", x);
-                    y = Escolhe_Coluna(7);
+                    y = Escolhe_Coluna_PC(7);
                     //printf("y = %d\n", y);
-                    i += Preencher_Tab(x, y, tiponav, d, tab);
+                    i += Preencher_Tab_PC(x, y, tiponav, d, tab);
                 }
 
                 else
                 {
-                    x = Escolhe_Linha(7);
+                    x = Escolhe_Linha_PC(7);
                     //printf("x = %d\n", x);
-                    y = Escolhe_Coluna(10);
+                    y = Escolhe_Coluna_PC(10);
                     //printf("y = %d\n", y);
-                    i += Preencher_Tab(x, y, tiponav, d, tab);
+                    i += Preencher_Tab_PC(x, y, tiponav, d, tab);
                 }
                 break;
                 
             case 3:
                 if(d == 0)
                 {
-                    x = Escolhe_Linha(10);
+                    x = Escolhe_Linha_PC(10);
                     //printf("x = %d\n", x);
-                    y = Escolhe_Coluna(8);
+                    y = Escolhe_Coluna_PC(8);
                     //printf("y = %d\n", y);
-                    i += Preencher_Tab(x, y, tiponav, d, tab);
+                    i += Preencher_Tab_PC(x, y, tiponav, d, tab);
                 }
 
                 else
                 {
-                    x = Escolhe_Linha(8);
+                    x = Escolhe_Linha_PC(8);
                     //printf("x = %d\n", x);
-                    y = Escolhe_Coluna(10);
+                    y = Escolhe_Coluna_PC(10);
                     //printf("y = %d\n", y);
-                    i += Preencher_Tab(x, y, tiponav, d, tab);
+                    i += Preencher_Tab_PC(x, y, tiponav, d, tab);
                 }
                 break;
                 
             case 2:
                 if(d == 0)
                 {
-                    x = Escolhe_Linha(10);
+                    x = Escolhe_Linha_PC(10);
                     //printf("x = %d\n", x);
-                    y = Escolhe_Coluna(8);
+                    y = Escolhe_Coluna_PC(8);
                     //printf("y = %d\n", y);
-                    i += Preencher_Tab(x, y, tiponav, d, tab);
+                    i += Preencher_Tab_PC(x, y, tiponav, d, tab);
                 }
 
                 else
                 {
-                    x = Escolhe_Linha(8);
+                    x = Escolhe_Linha_PC(8);
                     //printf("x = %d\n", x);
-                    y = Escolhe_Coluna(10);
+                    y = Escolhe_Coluna_PC(10);
                     //printf("y = %d\n", y);
-                    i += Preencher_Tab(x, y, tiponav, d, tab);
+                    i += Preencher_Tab_PC(x, y, tiponav, d, tab);
                 }
                 break;
                 
             case 1:
                 if(d == 0)
                 {
-                    x = Escolhe_Linha(10);
+                    x = Escolhe_Linha_PC(10);
                     //printf("x = %d\n", x);
-                    y = Escolhe_Coluna(10);
+                    y = Escolhe_Coluna_PC(10);
                     //printf("y = %d\n", y);
-                    i += Preencher_Tab(x, y, tiponav, d, tab);
+                    i += Preencher_Tab_PC(x, y, tiponav, d, tab);
                 }
 
                 else
                 {
-                    x = Escolhe_Linha(10);
+                    x = Escolhe_Linha_PC(10);
                     //printf("x = %d\n", x);
-                    y = Escolhe_Coluna(10);
+                    y = Escolhe_Coluna_PC(10);
                     //printf("y = %d\n", y);
-                    i += Preencher_Tab(x, y, tiponav, d, tab);
+                    i += Preencher_Tab_PC(x, y, tiponav, d, tab);
                 }
                 break;
                 
@@ -189,34 +132,25 @@ void Posicionar_navio(char** tab)
                 break;
         }
     }
-    printf("Computador\n");
+    printf("       Computador\n");
     Print_Tab(tab);
 }
 
-int Escolhe_Coluna(int a)
+int Escolhe_Coluna_PC(int a)
 {
     int col;
     col = rand()%a;
     return col;
 }
 
-int Escolhe_Linha(int a)
+int Escolhe_Linha_PC(int a)
 {
     int lin;
     lin = rand()%a;
     return lin;
 }
 
-/*
-int Escolhe_TipoNav()
-{
-    int navio;
-    navio = rand()%5+1;
-    return navio;
-}
-*/
-
-int Escolhe_Orient()
+int Escolhe_Orient_PC()
 {
     int o;
     o = rand()%2;
@@ -224,7 +158,7 @@ int Escolhe_Orient()
 }
 
 //Preenche o tabuleiro
-int Preencher_Tab(int linha, int coluna, int tiponav, int orientacao, char** tab)
+int Preencher_Tab_PC(int linha, int coluna, int tiponav, int orientacao, char** tab)
 {
     int flag, count=0;
     //Conta linha
@@ -233,7 +167,7 @@ int Preencher_Tab(int linha, int coluna, int tiponav, int orientacao, char** tab
         flag = Verificar_escolha(linha, coluna, tiponav, orientacao, tab);
         if(flag == 1)
         {
-            PreencherHorizontal(linha, coluna, tiponav, tab);
+            PreencherHorizontal_PC(linha, coluna, tiponav, tab);
             count++;
         }
     }
@@ -244,7 +178,7 @@ int Preencher_Tab(int linha, int coluna, int tiponav, int orientacao, char** tab
         flag = Verificar_escolha(linha, coluna, tiponav, orientacao, tab);
         if(flag == 1)
         {
-            PreencherVertical(linha, coluna, tiponav, tab);
+            PreencherVertical_PC(linha, coluna, tiponav, tab);
             count++;
         }
     } 
@@ -300,7 +234,7 @@ int Verificar_escolha(int lin, int col, int tiponav, int d, char **tab)
 }
 
 //Preenche o Tabuleiro na Horizontal
-void PreencherHorizontal(int lin, int col, int tiponav, char** nav)
+void PreencherHorizontal_PC(int lin, int col, int tiponav, char** nav)
 {
     switch (tiponav)
     {
@@ -341,7 +275,7 @@ void PreencherHorizontal(int lin, int col, int tiponav, char** nav)
 }
 
 //Preenche o Tabuleiro na Vertical
-void PreencherVertical(int lin, int col, int tiponav, char** nav)
+void PreencherVertical_PC(int lin, int col, int tiponav, char** nav)
 {
     switch (tiponav)
     {
