@@ -26,6 +26,7 @@ int main()
     return 0;
 }
 
+//Aloca memória dinamicamente ao tabuleiro
 char** Criar_Tab()
 {
     char** novo = (char**)malloc(10*sizeof(char*));
@@ -43,6 +44,7 @@ char** Criar_Tab()
     return novo;
 }
 
+//Libera a memória alocada dinamicamente
 void Free_Tab(char** novo)
 {
     for (int i = 0; i < 10; i++)
@@ -52,6 +54,7 @@ void Free_Tab(char** novo)
     free(novo);
 }
 
+//Printa o tabuleiro
 void Print_Tab(char** novo)
 {
     printf("   A B C D E F G H I J\n");
@@ -186,7 +189,8 @@ void Posicionar_navio(char** tab)
                 break;
         }
     }
-    //Print_Tab(tab);
+    printf("Computador\n");
+    Print_Tab(tab);
 }
 
 int Escolhe_Coluna(int a)
@@ -227,22 +231,17 @@ int Preencher_Tab(int linha, int coluna, int tiponav, int orientacao, char** tab
     if(orientacao == 0)
     {
         flag = Verificar_escolha(linha, coluna, tiponav, orientacao, tab);
-
         if(flag == 1)
         {
             PreencherHorizontal(linha, coluna, tiponav, tab);
             count++;
         }
-
-
     }
-
 
     //Conta coluna
     else
     {
         flag = Verificar_escolha(linha, coluna, tiponav, orientacao, tab);
-
         if(flag == 1)
         {
             PreencherVertical(linha, coluna, tiponav, tab);
@@ -253,7 +252,7 @@ int Preencher_Tab(int linha, int coluna, int tiponav, int orientacao, char** tab
     return count;
 }
 
-//Verifica se a linha escolhida pelo usuário não está ocupada, caso esteja devolve 0, 1 se não estiver ocupada.
+//Verifica se a linha/coluna escolhida pelo usuário não está ocupada, caso esteja devolve 0, 1 se não estiver ocupada.
 int Verificar_escolha(int lin, int col, int tiponav, int d, char **tab)
 {
     int flag=1, i, j;
@@ -308,33 +307,33 @@ void PreencherHorizontal(int lin, int col, int tiponav, char** nav)
     case 5:
         for(int j=0;j<5;j++)
 			nav[lin][col+j]='P';
-		printf("Tabuleiro do jogador\n");
-		Print_Tab(nav);
+		//printf("Tabuleiro do jogador\n");
+		//Print_Tab(nav);
         break;
     
     case 4:
         for(int j=0;j<4;j++)
 			nav[lin][col+j]='G';
-		printf("Tabuleiro do jogador\n");
-		Print_Tab(nav);
+		//printf("Tabuleiro do jogador\n");
+		//Print_Tab(nav);
         break;
     case 3:
         for(int j=0;j<3;j++)
 			nav[lin][col+j]='C';
-		printf("Tabuleiro do jogador\n");
-		Print_Tab(nav);
+		//printf("Tabuleiro do jogador\n");
+		//Print_Tab(nav);
         break;
     case 2:
         for(int j=0;j<3;j++)
 			nav[lin][col+j]='S';
-		printf("Tabuleiro do jogador\n");
-		Print_Tab(nav);
+		//printf("Tabuleiro do jogador\n");
+		//Print_Tab(nav);
         break;
     case 1:
         for(int j=0;j<2;j++)
 			nav[lin][col+j]='D';
-		printf("Tabuleiro do jogador\n");
-		Print_Tab(nav);
+		//printf("Tabuleiro do jogador\n");
+		//Print_Tab(nav);
         break;
     default:
         break;
@@ -349,34 +348,34 @@ void PreencherVertical(int lin, int col, int tiponav, char** nav)
     case 5:
         for(int j=0;j<5;j++)
 			nav[lin+j][col] = 'P';
-		printf("Tabuleiro do jogador\n");
-		Print_Tab(nav);
+		//printf("Tabuleiro do jogador\n");
+		//Print_Tab(nav);
         break;
     
     case 4:
         for(int j=0;j<4;j++)
 			nav[lin+j][col] = 'G';
-		printf("Tabuleiro do jogador\n");
-		Print_Tab(nav);
+		//printf("Tabuleiro do jogador\n");
+		//Print_Tab(nav);
 
         break;
     case 3:
         for(int j=0;j<3;j++)
 			nav[lin+j][col] = 'C';
-		printf("Tabuleiro do jogador\n");
-		Print_Tab(nav);
+		//printf("Tabuleiro do jogador\n");
+		//Print_Tab(nav);
         break;
     case 2:
         for(int j=0;j<3;j++)
 			nav[lin+j][col] = 'S';
-		printf("Tabuleiro do jogador\n");
-		Print_Tab(nav);
+		///printf("Tabuleiro do jogador\n");
+		//Print_Tab(nav);
         break;
     case 1:
         for(int j=0;j<2;j++)
 			nav[lin+j][col] = 'D';
-		printf("Tabuleiro do jogador\n");
-		Print_Tab(nav);
+		//printf("Tabuleiro do jogador\n");
+		//Print_Tab(nav);
         break;
     default:
         break;
