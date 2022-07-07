@@ -3,15 +3,15 @@
 #include <time.h>
 #include "PC.h"
 
-
-char** Criar_Tab();
-void Free_Tab(char**);
+//Funções auxiliar
 void Print_Tab(char**);
+int Verificar_coordenada(int, int, int, int, char**);
+
+//Funções auxiliares para a Posicionar_navio_PC
 int Escolhe_Coluna_PC(int);
 int Escolhe_Linha_PC(int);
 int Escolhe_Orient_PC();
 int Preencher_Tab_PC(int, int, int, int, char**);
-int Verificar_escolha(int, int, int, int, char**);
 void PreencherHorizontal_PC(int, int, int, char**);
 void PreencherVertical_PC(int, int, int, char**);
 
@@ -132,8 +132,9 @@ void Posicionar_navio_PC(char** tab)
                 break;
         }
     }
-    printf("       Computador\n");
+    printf("Computador\n");
     Print_Tab(tab);
+    printf("\n");
 }
 
 int Escolhe_Coluna_PC(int a)
@@ -164,7 +165,7 @@ int Preencher_Tab_PC(int linha, int coluna, int tiponav, int orientacao, char** 
     //Conta linha
     if(orientacao == 0)
     {
-        flag = Verificar_escolha(linha, coluna, tiponav, orientacao, tab);
+        flag = Verificar_coordenada(linha, coluna, tiponav, orientacao, tab);
         if(flag == 1)
         {
             PreencherHorizontal_PC(linha, coluna, tiponav, tab);
@@ -175,7 +176,7 @@ int Preencher_Tab_PC(int linha, int coluna, int tiponav, int orientacao, char** 
     //Conta coluna
     else
     {
-        flag = Verificar_escolha(linha, coluna, tiponav, orientacao, tab);
+        flag = Verificar_coordenada(linha, coluna, tiponav, orientacao, tab);
         if(flag == 1)
         {
             PreencherVertical_PC(linha, coluna, tiponav, tab);
@@ -184,53 +185,6 @@ int Preencher_Tab_PC(int linha, int coluna, int tiponav, int orientacao, char** 
     } 
 
     return count;
-}
-
-//Verifica se a linha/coluna escolhida pelo usuário não está ocupada, caso esteja devolve 0, 1 se não estiver ocupada.
-int Verificar_escolha(int lin, int col, int tiponav, int d, char **tab)
-{
-    int flag=1, i, j;
-	switch (tiponav)
-	{
-	case 5:
-		i=5;
-        break;
-    
-    case 4:
-        i=4;
-        break;
-    case 3:
-        i=3;
-        break;
-    case 2:
-		i=3;
-        break;
-    case 1:
-        i=2;
-        break;
-    default:
-        break;
-    }
-
-    if(d == 0)
-    {
-        for(j=0;j<i;j++)
-        {
-            if(tab[lin][col+j]!='-')
-                flag=0;
-        }
-    }
-
-    else
-    {
-        for(j=0;j<i;j++)
-	    {
-		    if(tab[lin+j][col]!='-')
-			    flag=0;
-	    }
-    }
-
-    return flag;
 }
 
 //Preenche o Tabuleiro na Horizontal

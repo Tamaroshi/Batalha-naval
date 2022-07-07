@@ -1,5 +1,7 @@
 {
-    "files.associations": {
-        "stdio.h": "c"
-    }
+  "files.associations": {
+    "*.json": "c",
+    "stdio.h": "c",
+    "player.h": "c"
+  }
 }
